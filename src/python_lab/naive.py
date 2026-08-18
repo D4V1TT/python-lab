@@ -1,4 +1,4 @@
-from models import Employee, Department
+from python_lab.models import Employee, Department
 
 def count_by_depts(emps: list[Employee]) -> dict:
     return {

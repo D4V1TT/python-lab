@@ -1,6 +1,6 @@
 from typing import Iterable
-from models import Employee, Department
-from aggregates import group_by, salary_stats_by_depts
+from python_lab.models import Employee, Department
+from python_lab.aggregates import group_by, salary_stats_by_depts
 
 def high_earners(emps: list[Employee], threshold: int) -> list:
     """return names of employees, who earn more than threshold"""

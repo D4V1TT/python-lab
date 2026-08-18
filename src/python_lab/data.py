@@ -1,3 +1,23 @@
+import random
+from python_lab.models import Employee
+
+def make_employees(n: int, seed: int = 42) -> list[Employee]:
+    """Deterministic synthetic data for benchmarks and tests."""
+    rng = random.Random(seed)
+    depts = ["IT", "Finance", "Sales", "HR", "Ops"]
+    return [
+        {
+            "emp_id": i,
+            "name": f"emp_{i}",
+            "dept": rng.choice(depts),
+            "salary": rng.randrange(2000, 8000, 100),
+            "hired": f"{rng.randint(2015, 2025)}-{rng.randint(1, 12):02d}-{rng.randint(1, 28):02d}",
+            "manager_id": rng.randint(1, max(1, i - 1)) if i > 1 else None,
+        }
+        for i in range(1, n + 1)
+    ]
+
+
 EMPLOYEES = [
     {
         "emp_id": 1,

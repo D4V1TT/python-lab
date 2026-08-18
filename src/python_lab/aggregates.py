@@ -1,9 +1,9 @@
 from datetime import datetime
-from typing import Iterable
+from typing import Iterable, Callable, Hashable
 from collections import defaultdict
-from models import Employee
+from python_lab.models import Employee
 
-def group_by(rows: Iterable, key: str) -> dict:
+def group_by(rows: Iterable, key:  str | Callable[[Employee], Hashable]) -> dict:
     """return employees grouped by key(departments, name ...)"""
     key_func = key if callable(key) else lambda row: row[key]
 

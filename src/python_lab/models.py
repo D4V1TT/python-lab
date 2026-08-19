@@ -14,3 +14,10 @@ class Department(TypedDict):
     dept: str
     location: str
     budget: int
+
+class FileReport(TypedDict):
+    name: str
+    stem: str
+    suffix: str
+    size_kb: float
+    modified: str

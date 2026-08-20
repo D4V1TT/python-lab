@@ -11,6 +11,7 @@ def project_root(marker: str = "pyproject.toml") -> Path:
     raise FileNotFoundError(f"No {marker} in any parent of {__file__}")
 
 def report_file(file: Path) -> FileReport:
+    """return file information"""
     stat = file.stat()
     return {'name': file.name,
             'stem': file.stem,
@@ -20,20 +21,25 @@ def report_file(file: Path) -> FileReport:
             }
 
 def find_by_extension(folder: Path, ext: str) -> list[Path]:
+    """return a list of file paths that match the extension"""
     suffix = ext if ext.startswith('.') else f'.{ext}'
     return sorted(p for p in folder.rglob(f'*{suffix}') if p.is_file())
 
 def total_size(folder: Path) -> float:
+    """return the total size of the files in the folder"""
     return round(sum(x.stat().st_size for x in folder.rglob('*') if x.is_file()) / 1024**2, 2)
 
 def group_files_by_extension(folder: Path) -> dict[str, list[Path]]:
+    """return a dictionary of file paths grouped by extension"""
     return group_by([x for x in folder.rglob('*') if x.is_file()], key = lambda x: x.suffix.lower())
 
 def largest_files(folder: Path, n: int = 5 ) -> list[Path]:
+    """return a list of largest file paths"""
     files = [x for x in folder.rglob('*') if x.is_file()]
     return sorted(files, key = lambda x: x.stat().st_size, reverse = True)[:n]
 
 def safe_target(path: Path) -> Path:
+    """return a file path that does not exist"""
     safe_path = path
     counter = 1
     while safe_path.exists():
